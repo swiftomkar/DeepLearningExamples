@@ -79,3 +79,4 @@ FROM image-machine-${DGX_VERSION} AS final
 RUN echo "spark.worker.resource.gpu.amount    ${NUMBER_OF_GPUS}" >> /opt/spark/conf/spark-defaults.conf
 #WORKDIR /workspace/dlrm/preproc/
 #ENTRYPOINT ["./prepare_dataset.sh", "15", "GPU Spark"]
+
