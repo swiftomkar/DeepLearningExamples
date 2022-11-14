@@ -51,6 +51,9 @@ RUN mv /opt/cudf.jar  /opt/spark/jars &&                                        
 RUN chmod +x /workspace/dlrm/preproc/run_spark_gpu_$DGX_VERSION.sh
 RUN chmod +x /opt/spark/conf/get_gpu_resources.sh
 RUN chmod +x /workspace/dlrm/preproc/run_NVTabular.sh
+RUN chmod +x /workspace/dlrm/preproc/prepare_dataset.sh
+RUN chmod +x /workspace/dlrm/preproc/verify_criteo_downloaded.sh
+RUN chmod +x /workspace/dlrm/preproc/run_spark.sh
 
 ENV SPARK_HOME /opt/spark
 ENV PYTHONPATH $SPARK_HOME/python
@@ -70,7 +73,9 @@ ARG NUMBER_OF_GPUS
 ENV NUMBER_OF_GPUS ${NUMBER_OF_GPUS:-16}
 
 FROM base AS image-machine-DGX-A100
-ENV NUMBER_OF_GPUS 8
+ENV NUMBER_OF_GPUS 2
 
 FROM image-machine-${DGX_VERSION} AS final
 RUN echo "spark.worker.resource.gpu.amount    ${NUMBER_OF_GPUS}" >> /opt/spark/conf/spark-defaults.conf
+#WORKDIR /workspace/dlrm/preproc/
+#ENTRYPOINT ["./prepare_dataset.sh", "15", "GPU Spark"]

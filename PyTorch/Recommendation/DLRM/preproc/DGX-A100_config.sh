@@ -20,7 +20,7 @@
 
 # below numbers should be adjusted according to the resource of your running environment
 # set the total number of CPU cores, spark can use
-export TOTAL_CORES=256
+export TOTAL_CORES=24
 
 # set the number of executors
 export NUM_EXECUTORS=8
@@ -29,10 +29,10 @@ export NUM_EXECUTORS=8
 export NUM_EXECUTOR_CORES=$((${TOTAL_CORES}/${NUM_EXECUTORS}))
 
 # unit: GB,  set the max memory you want to use
-export TOTAL_MEMORY=2000
+export TOTAL_MEMORY=32
 
 # unit: GB, set the memory for driver
-export DRIVER_MEMORY=32
+export DRIVER_MEMORY=3
 
 # the memory per executor
-export EXECUTOR_MEMORY=$(((${TOTAL_MEMORY}-${DRIVER_MEMORY})/${NUM_EXECUTORS}-16))
+export EXECUTOR_MEMORY=$(((${TOTAL_MEMORY}-${DRIVER_MEMORY})/${NUM_EXECUTORS}))
